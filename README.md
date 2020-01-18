@@ -22,12 +22,10 @@ source code For paper  "Co-Attentive Representation Learning for Code Search"
    
    Edit hyper-parameters and settings in `config.py`
    
-   ### Train
+   ### Train and Evaluate
    
    ```bash
    python main.py --mode train
-   
-   ### Evaluate
    
    ```bash
    python main.py --mode eval
