@@ -13,7 +13,7 @@ class AttentionLayer(Layer):
         if not input_shape[0][2] == input_shape[1][2]:
             raise ValueError('Embedding sizes should be of the same size')
 
-        self.kernel = self.add_weight(shape=(input_shape[0][2], input_shape[0][2]),         #(dim,dim)
+        self.kernel = self.add_weight(shape=(input_shape[0][2], input_shape[0][2]),         
                                       initializer='glorot_uniform',
                                       name='kernel',
                                       trainable=True)
