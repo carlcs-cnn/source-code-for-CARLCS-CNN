@@ -206,7 +206,7 @@ class CodeSearcher:
             c_2 += 1 / float(r[max_r] - r[max_n] + 1)
 
         top1 = c_1 / float(data_len)
-            #percentage of predicted most similar desc that is really the corresponding desc
+            #percentage of predicted most similar desc that is really corresponding desc
         mrr = c_2 / float(data_len)
         logger.info('Top-1 Precision={}, MRR={}'.format(top1,mrr))
         
