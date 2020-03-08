@@ -87,17 +87,17 @@ class CARLCS_CNN:
         dropout = Dropout(0.25,name='dropout_apiseq_embed')
         apiseq_dropout = dropout(apiseq_embedding)
 
-        #2.rnn
-        f_rnn = LSTM(100, return_sequences=True, recurrent_dropout=0.2,
-                      name='lstm_apiseq_f')
-        b_rnn = LSTM(100, return_sequences=True, recurrent_dropout=0.2, 
-                      name='lstm_apiseq_b', go_backwards=True)        
-        apiseq_f_rnn = f_rnn(apiseq_dropout)
-        apiseq_b_rnn = b_rnn(apiseq_dropout)
-        dropout = Dropout(0.25,name='dropout_apiseq_rnn')
-        apiseq_f_dropout = dropout(apiseq_f_rnn)
-        apiseq_b_dropout = dropout(apiseq_b_rnn)
-        merged_api=Concatenate(name='api_rnn_concat',axis=1)([apiseq_f_dropout,apiseq_b_dropout])
+        api_conv1 = Conv1D(100,2,padding='valid', activation='relu',strides=1,name='api_conv1')
+        api_conv2 = Conv1D(100,3,padding='valid', activation='relu',strides=1,name='api_conv2')
+        api_conv3 = Conv1D(100,4,padding='valid', activation='relu',strides=1,name='api_conv3')
+        api_conv1_out = api_conv1(apiseq_dropout)
+        api_conv2_out = api_conv2(apiseq_dropout)
+        api_conv3_out = api_conv3(apiseq_dropout)
+        dropout = Dropout(0.25,name='dropout_api_conv')
+        api_conv1_dropout = dropout(api_conv1_out)
+        api_conv2_dropout = dropout(api_conv2_out)
+        api_conv3_dropout = dropout(api_conv3_out)
+        merged_api= Concatenate(name='api_merge',axis=1)([api_conv1_dropout,api_conv2_dropout,api_conv3_dropout])
 
 
 
